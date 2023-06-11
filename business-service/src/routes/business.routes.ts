@@ -1,6 +1,6 @@
 import { jwtMiddleware } from './../middlewares/jwtMiddleware';
 import express, { Router } from 'express';
-import { BusinessControlelr } from '../app/controllers/business.controller';
+import { BusinessControlelr } from '../controllers/business.controller';
 import { config } from '../config/config';
 
 class BusinessRoutes {

@@ -1,7 +1,7 @@
-import { businessService } from './../app/services/business.services';
+import { businessService } from './../services/business.services';
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { IUser } from '../app/models/user';
+import { IUser } from '../models/user';
 
 interface CustomRequest extends Request {
     user?: IUser | null; // Define the 'user' property with the appropriate type

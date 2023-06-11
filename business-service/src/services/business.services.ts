@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { BusinessRepository as BusinessRepository, businessRepository as businessRepository } from '../repositories/business.repositories';
-import { config } from '../../config/config';
+import { config } from '../config/config';
 import { IUser } from '../models/user';
 
 export class BusinessService {

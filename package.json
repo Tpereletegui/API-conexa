@@ -5,7 +5,8 @@
       "start-login-service": "cd login-service && npm install && npm run dev",
       "start-business-service": "cd business-service && npm install && npm run dev",
       "start-event-bus": "cd event-bus && npm install && npm run dev",
-      "start-all": "concurrently \"npm run start-login-service\" \"npm run start-business-service\" \"npm run start-event-bus\""
+      "test:all": "cd login-service && npm run test",
+      "start:all": "concurrently \"npm run start-login-service\" \"npm run start-business-service\" \"npm run start-event-bus\""
     },
     "dependencies": {
       "concurrently": "^6.2.2",

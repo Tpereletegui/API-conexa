@@ -1,6 +1,6 @@
 import { BusinessService as BusinessService, businessService } from '../services/business.services';
 import { Request, Response } from 'express';
-import { config } from '../../config/config';
+import { config } from '../config/config';
 import { BusinessRepository as BusinessRepository } from '../repositories/business.repositories'
 import User from '../models/user';
 
