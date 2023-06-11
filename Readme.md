@@ -1,8 +1,6 @@
 # Proyecto API-CONEXA 
 
-¡Hola!
 
-Bienvenidos a mi proyecto XYZ. Este es mi trabajo para la prueba técnica que realicé como parte del proceso de selección para un empleo.
 
 ## Configuración del proyecto
 
