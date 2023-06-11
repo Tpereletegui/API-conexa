@@ -11,7 +11,8 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
     const queryParams = `?page=${page}${emailParam}`
     const businessServiceResponse = await axios.get(`${businessLoginUrl}/users${queryParams}`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
+        'x-allowed-app': req.protocol + '://' + req.get('host')
       }
     });
 

@@ -5,6 +5,7 @@ import { IUser } from '../models/user';
 import axios from 'axios';
 import { ILoginService } from '../interfaces/services/LoginService';
 import { ILoginRepository } from '../interfaces/repositories/LoginRepository'
+import { error } from 'console';
 
 export class LoginService implements ILoginService {
   private readonly secretKey: string;
@@ -45,11 +46,9 @@ export class LoginService implements ILoginService {
           Authorization: token
         }
       });
-
       const users = eventBusResponse.data.users
       return users;
     } catch (error) {
-      console.error(error)
       throw new Error('Error retrieving user list');
     }
   }
