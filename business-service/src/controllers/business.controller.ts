@@ -1,3 +1,4 @@
+import { loginServiceUrl } from './../../../event-bus/src/config';
 import { BusinessService as BusinessService, businessService } from '../services/business.services';
 import { Request, Response } from 'express';
 import { config } from '../config/config';
@@ -14,6 +15,10 @@ export class BusinessControlelr {
 
   public async listUsers(req: Request, res: Response): Promise<void> {
     try {
+      const url = req.protocol + '://' + req.get('host') + req.originalUrl;
+      if (url.includes(loginServiceUrl)) {
+        throw new Error('Access denied');
+      }
       const page = req.query.page;
       const email = req.query.email as string;
       const parsedPage = parseInt(page as string, 10)
