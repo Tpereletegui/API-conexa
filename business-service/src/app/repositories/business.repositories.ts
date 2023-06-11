@@ -8,11 +8,11 @@ export class BusinessRepository {
     this.userModel = userModel;
   }
 
-  public async getUsers(page: number, perPage: number, search?: string): Promise<IUser[]> {
+  public async getUsers(page: number, perPage: number, email?: string): Promise<IUser[]> {
     try {
       const query: FilterQuery<IUser> = {};
-      if (search) {
-        query.email = { $regex: search, $options: 'i' }; // Case-insensitive search
+      if (email) {
+        query.email = { $regex: email, $options: 'i' };
       }
 
       const users = await this.userModel

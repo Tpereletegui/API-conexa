@@ -13,9 +13,9 @@ export class BusinessService {
     this.businessRepository = businessRepository;
   }
 
-  public async listUsers(page: number, perPage: number, search?: string): Promise<IUser[]> {
+  public async listUsers(page: number, perPage: number, email?: string | undefined): Promise<IUser[]> {
     try {
-      const users = await this.businessRepository.getUsers(page, perPage, search);
+      const users = await this.businessRepository.getUsers(page, perPage, email);
       return users;
     } catch (error) {
       throw new Error('Error retrieving user list');

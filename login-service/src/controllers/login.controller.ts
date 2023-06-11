@@ -1,11 +1,12 @@
+import { ILoginService } from '../interfaces/services/LoginService';
 import { LoginService, loginService } from './../services/login.services';
 import { Request, Response } from 'express';
 
 
 export class LoginController {
-  private loginService: LoginService;
+  private loginService: ILoginService;
 
-  constructor() {
+  constructor(loginService: ILoginService) {
     this.loginService = loginService;
   }
 
@@ -13,7 +14,7 @@ export class LoginController {
     try {
       const { email, password } = req.body;
       const user = await this.loginService.registerUser(email, password);
-      res.status(201).json({ message: 'User registered successfully', user });
+      res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
       console.error('Error registering user:', error);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -34,11 +35,14 @@ export class LoginController {
   public async listUsers(req: Request, res: Response): Promise<void> {
     try {
       const token = req.headers.authorization!!
-      const users = await this.loginService.listUsers(token);
+      const page = req.query.page as string
+      const email = req.query.email as string
+      const users = await this.loginService.listUsers(token, page, email);
       res.status(200).json(users);
     } catch (error) {
-      console.error('Error listing users:', error);
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 }
+
+export const loginController: LoginController = new LoginController(loginService)

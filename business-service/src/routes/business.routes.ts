@@ -12,7 +12,7 @@ class BusinessRoutes {
 
 	public routes(): Router {
 		const businessController = new BusinessControlelr();
-		this.router.get('/users', jwtMiddleware(config.JWT_TOKEN), businessController.listUsers.bind(businessController));
+		this.router.get('/users', jwtMiddleware(config.SECRET_KEY_ONE), businessController.listUsers.bind(businessController));
 
 		return this.router;
 	}

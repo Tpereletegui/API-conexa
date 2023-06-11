@@ -1,10 +1,10 @@
-import { loginService } from '../app/services/login.services';
+import { loginService } from '../services/login.services';
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { IUser } from '../app/models/user';
+import { IUser } from '../models/user';
 
 interface CustomRequest extends Request {
-    user?: IUser | null; // Define the 'user' property with the appropriate type
+    user?: IUser | null;
   }
 
 export const jwtMiddleware = (secretKey: string) => {

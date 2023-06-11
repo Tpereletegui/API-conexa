@@ -1,14 +1,16 @@
 import jwt from 'jsonwebtoken';
-import { LoginRepository, loginRepository } from '../repositories/login.repositories';
-import { config } from '../../config/config';
+import { MongoLoginRepository, mongoLoginRepository } from '../repositories/MongoLoginRepository';
+import { config } from '../config/config';
 import { IUser } from '../models/user';
 import axios from 'axios';
+import { ILoginService } from '../interfaces/services/LoginService';
+import { ILoginRepository } from '../interfaces/repositories/LoginRepository'
 
-export class LoginService {
+export class LoginService implements ILoginService {
   private readonly secretKey: string;
-  private readonly loginRepository: LoginRepository;
+  private readonly loginRepository: ILoginRepository;
 
-  constructor(secretKey: string, loginRepository: LoginRepository) {
+  constructor(secretKey: string, loginRepository: ILoginRepository) {
     this.secretKey = secretKey;
     this.loginRepository = loginRepository;
   }
@@ -34,9 +36,11 @@ export class LoginService {
     return token;
   }
 
-  public async listUsers(token: string): Promise<IUser[]> {
+  public async listUsers(token: string, page: string, email?: string): Promise<IUser[]> {
     try {
-      const eventBusResponse = await axios.get(`${config.EVENT_BUS_URL}/users`, {
+      const emailParam = email != null && email != '' ? `&email=${email}` : ''
+      const queryParams = `?page=${page}${emailParam}`
+      const eventBusResponse = await axios.get(`${config.EVENT_BUS_URL}/users${queryParams}`, {
         headers: {
           Authorization: token
         }
@@ -44,7 +48,6 @@ export class LoginService {
 
       const users = eventBusResponse.data.users
       return users;
-      // return await this.loginRepository.getUsers()
     } catch (error) {
       console.error(error)
       throw new Error('Error retrieving user list');
@@ -75,4 +78,4 @@ interface UserData {
   users: IUser[];
 }
 
-export const loginService: LoginService = new LoginService(config.JWT_TOKEN, loginRepository)
+export const loginService: LoginService = new LoginService(config.SECRET_KEY_ONE, mongoLoginRepository)

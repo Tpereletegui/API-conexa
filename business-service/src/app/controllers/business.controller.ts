@@ -14,11 +14,11 @@ export class BusinessControlelr {
 
   public async listUsers(req: Request, res: Response): Promise<void> {
     try {
-      const { page = '1', perPage = '10', search } = req.query;
+      const page = req.query.page;
+      const email = req.query.email as string;
       const parsedPage = parseInt(page as string, 10)
-      const parsedPerPage = parseInt(perPage as string, 10)
-      const parsedSearch = search?.toString();
-      const users = await this.businessService.listUsers(parsedPage, parsedPerPage, parsedSearch);
+      const perPage = 10
+      const users = await this.businessService.listUsers(parsedPage, perPage, email);
       res.status(200).json({ users });
     } catch (error) {
       console.error('Error retrieving user list:', error);

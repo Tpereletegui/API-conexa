@@ -1,7 +1,8 @@
 import { Model } from 'mongoose';
 import user, { IUser } from '../models/user';
+import { ILoginRepository } from '../interfaces/repositories/LoginRepository';
 
-export class LoginRepository {
+export class MongoLoginRepository implements ILoginRepository {
   private readonly userModel: Model<IUser>;
 
   constructor(userModel: Model<IUser>) {
@@ -43,6 +44,10 @@ export class LoginRepository {
       throw new Error('Error retrieving user');
     }
   }
+
+  setUsers():void {
+    throw new Error('Method not implemented.');
+  }
 }
 
-export const loginRepository: LoginRepository = new LoginRepository(user)
+export const mongoLoginRepository: MongoLoginRepository = new MongoLoginRepository(user)

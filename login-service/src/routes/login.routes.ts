@@ -1,7 +1,8 @@
 import { jwtMiddleware } from '../middlewares/jwtMiddleware';
 import express, { Router } from 'express';
-import { LoginController } from '../app/controllers/login.controller';
+import { LoginController } from '../controllers/login.controller';
 import { config } from '../config/config';
+import { loginService } from '../services/login.services';
 
 class LoginRoutes {
 	private router: Router;
@@ -11,10 +12,10 @@ class LoginRoutes {
 	}
 
 	public routes(): Router {
-		const loginController = new LoginController();
+		const loginController = new LoginController(loginService);
 		this.router.post('/signup', loginController.registerUser.bind(loginController));
 		this.router.get('/login', loginController.loginUser.bind(loginController));
-		this.router.get('/users', jwtMiddleware(config.JWT_TOKEN), loginController.listUsers.bind(loginController));
+		this.router.get('/users', jwtMiddleware(config.SECRET_KEY_ONE), loginController.listUsers.bind(loginController));
 
 		return this.router;
 	}
