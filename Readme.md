@@ -17,7 +17,7 @@ Desarrollé las aplicaciones "login-service" y "business-service" de forma total
 
 En este proyecto, utilicé el event-bus como intermediario para la comunicación entre los servicios, debido a las limitaciones de tiempo. Sin embargo, entiendo que eventualmente podría ser reemplazado por un message broker, lo que permitiría una comunicación asincrónica utilizando el enfoque publish/suscribe.
 
-### Deuda Técnica
+### Technical debt
 
 Debido a las restricciones de tiempo, no pude abordar los siguientes requisitos y mejoras:
 
